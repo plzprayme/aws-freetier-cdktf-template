@@ -14,11 +14,15 @@ public class Main
     public static void main(String[] args) {
         final App app = new App();
         MainStack stack = new MainStack(app, "aws-freetier-cdktf-template");
+        provisionTFCloud(stack, Constant.TF_CLOUD_ORGANIZATION, Constant.TF_WORKSPACE);
+        app.synth();
+    }
+
+    private static void provisionTFCloud(TerraformStack stack, final String organization, final String workspace) {
         new CloudBackend(stack, CloudBackendProps.builder()
                 .hostname("app.terraform.io")
-                .organization("2022summit")
-                .workspaces(new NamedCloudWorkspace("aws-freetier-cdktf-template"))
+                .organization(organization)
+                .workspaces(new NamedCloudWorkspace(workspace))
                 .build());
-        app.synth();
     }
 }
