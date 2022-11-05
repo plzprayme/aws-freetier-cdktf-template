@@ -1,4 +1,4 @@
-package com.mycompany.app.construct.provider;
+package com.mycompany.app.construct.aws.provider;
 
 import com.mycompany.app.construct.Provisonable;
 import lombok.AllArgsConstructor;
