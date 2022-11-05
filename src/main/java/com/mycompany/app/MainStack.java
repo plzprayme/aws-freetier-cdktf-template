@@ -10,6 +10,8 @@ import com.hashicorp.cdktf.providers.aws.iam_role.IamRole;
 import com.hashicorp.cdktf.providers.aws.provider.AwsProvider;
 import com.hashicorp.cdktf.providers.aws.s3_bucket.S3Bucket;
 import com.hashicorp.cdktf.providers.aws.s3_object.S3Object;
+import com.mycompany.app.constant.Configuration;
+import com.mycompany.app.constant.Constant;
 import org.jetbrains.annotations.NotNull;
 import software.constructs.Construct;
 
@@ -21,9 +23,9 @@ public class MainStack extends TerraformStack
 {
     public MainStack(final Construct scope, final String id) {
         super(scope, id);
-        TerraformProvider provider = provisionProvider(Constant.REGION, Constant.AWS_ACCESS_KEY, Constant.AWS_SECRET_KEY);
+        TerraformProvider provider = provisionProvider(Configuration.Aws.REGION, Configuration.Aws.AWS_ACCESS_KEY, Configuration.Aws.AWS_SECRET_KEY);
         IamInstanceProfile iamInstanceProfile = provisionIamInstanceProfile();
-        ElasticBeanstalkApplication ebApp = provisionEbApp(Constant.GITHUB_REPOSITORY, Constant.SOURCE_BUNDLE_PATH);
+        ElasticBeanstalkApplication ebApp = provisionEbApp(Constant.Version.PROJECT_NAME, Constant.Resource.S3.SOURCE_BUNDLE_PATH);
     }
 
     private TerraformProvider provisionProvider(
@@ -69,12 +71,12 @@ public class MainStack extends TerraformStack
     private String generateObjectKey(String sourcePath) {
         String[] splited = sourcePath.split("/");
         final String sourceFileName = splited[splited.length - 1];
-        return Constant.VERSION + sourceFileName;
+        return Constant.Version.VERSION + sourceFileName;
     }
 
     private S3Bucket provisionS3Bucket() {
         return S3Bucket.Builder.create(this, "eb-source-bucket")
-                .bucket(Constant.GITHUB_REPOSITORY + "_bucket")
+                .bucket(Constant.Version.PROJECT_NAME + "_bucket")
                 .acl("private")
                 .build();
     }
@@ -134,13 +136,11 @@ public class MainStack extends TerraformStack
 
         List<ElasticBeanstalkEnvironmentSetting> ebEnvSettings = provisionEbEnvSettings();
         return ElasticBeanstalkEnvironment.Builder.create(this, "eb-env")
-                .name(Constant.GITHUB_REPOSITORY + "env")
+                .name(Constant.Version.PROJECT_NAME + "env")
                 .application(application.getName())
-                .solutionStackName(Constant.EB_SOLUTION_STACK)
+                .solutionStackName(Constant.Resource.ElasticBeanstalk.SOLUTION_STACK)
                 .setting(ebEnvSettings)
                 .versionLabel(ebAppVersion.getName())
                 .build();
     }
-
-
 }
