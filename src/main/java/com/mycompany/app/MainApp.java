@@ -6,13 +6,14 @@ import com.hashicorp.cdktf.CloudBackend;
 import com.hashicorp.cdktf.CloudBackendProps;
 import com.hashicorp.cdktf.TerraformStack;
 import com.mycompany.app.constant.Configuration;
+import com.mycompany.app.constant.Constant;
 
 
 public class MainApp
 {
     public static void main(String[] args) {
         final App app = new App();
-        MainStack stack = new MainStack(app, "aws-freetier-cdktf-template");
+        MainStack stack = new MainStack(app, Constant.Version.PROJECT_NAME + "-dev");
         provisionTFCloud(stack, Configuration.TFCloud.ORGANIZATION, Configuration.TFCloud.WORKSPACE, Configuration.TFCloud.TOKEN);
         app.synth();
     }

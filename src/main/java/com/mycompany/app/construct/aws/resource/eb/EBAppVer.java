@@ -10,7 +10,7 @@ import software.constructs.Construct;
 
 public class EBAppVer implements Provisonable<ElasticBeanstalkApplicationVersion> {
 
-    private final String ID = Constant.Version.PROJECT_NAME + "eb-app-ver";
+    private final String ID = Constant.Version.PROJECT_NAME + "-eb-app-ver";
     private final String NAME = Constant.Version.VERSION;
 
     private final String appName;
