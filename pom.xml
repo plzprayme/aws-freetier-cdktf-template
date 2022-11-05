@@ -35,6 +35,12 @@
       <artifactId>cdktf-provider-aws</artifactId>
       <version>10.0.11</version>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.24</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
@@ -54,7 +60,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.0.0</version>
         <configuration>
-          <mainClass>com.mycompany.app.Main</mainClass>
+          <mainClass>com.mycompany.app.MainApp</mainClass>
         </configuration>
       </plugin>
       <plugin>
