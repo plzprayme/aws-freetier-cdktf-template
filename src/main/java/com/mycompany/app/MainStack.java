@@ -7,11 +7,11 @@ import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_environment.ElasticBe
 import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_environment.ElasticBeanstalkEnvironmentSetting;
 import com.hashicorp.cdktf.providers.aws.iam_instance_profile.IamInstanceProfile;
 import com.hashicorp.cdktf.providers.aws.iam_role.IamRole;
-import com.hashicorp.cdktf.providers.aws.provider.AwsProvider;
 import com.hashicorp.cdktf.providers.aws.s3_bucket.S3Bucket;
 import com.hashicorp.cdktf.providers.aws.s3_object.S3Object;
 import com.mycompany.app.constant.Configuration;
 import com.mycompany.app.constant.Constant;
+import com.mycompany.app.construct.provider.AwsProvider;
 import org.jetbrains.annotations.NotNull;
 import software.constructs.Construct;
 
@@ -23,20 +23,16 @@ public class MainStack extends TerraformStack
 {
     public MainStack(final Construct scope, final String id) {
         super(scope, id);
-        TerraformProvider provider = provisionProvider(Configuration.Aws.REGION, Configuration.Aws.AWS_ACCESS_KEY, Configuration.Aws.AWS_SECRET_KEY);
+
+        provisionProvider(scope);
+
         IamInstanceProfile iamInstanceProfile = provisionIamInstanceProfile();
         ElasticBeanstalkApplication ebApp = provisionEbApp(Constant.Version.PROJECT_NAME, Constant.Resource.S3.SOURCE_BUNDLE_PATH);
     }
 
-    private TerraformProvider provisionProvider(
-            final String region,
-            final String accessKey,
-            final String secretKey) {
-        return AwsProvider.Builder.create(this, "aws-provider")
-                .region(region)
-                .accessKey(accessKey)
-                .secretKey(secretKey)
-                .build();
+    private void provisionProvider(Construct scope) {
+        new AwsProvider(Configuration.Aws.REGION, Configuration.Aws.AWS_ACCESS_KEY, Configuration.Aws.AWS_SECRET_KEY)
+                .provision(scope);
     }
 
     private ElasticBeanstalkApplication provisionEbApp(final String ebAppPrefix, final String sourcePath) {
