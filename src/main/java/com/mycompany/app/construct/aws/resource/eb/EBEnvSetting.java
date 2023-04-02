@@ -18,7 +18,11 @@ public class EBEnvSetting implements Provisonable<List<ElasticBeanstalkEnvironme
 
     @Override
     public List<ElasticBeanstalkEnvironmentSetting> provision(Construct scope) {
-        return List.of(provisionIamInstanceProfile(iamInstanceProfileName));
+        return List.of(
+                provisionIamInstanceProfile(iamInstanceProfileName),
+                provisionKeyPair(), provisionInstanceType(), provisionEBCWLogHealth(),
+                provisionEBCWStreamLogs()
+        );
     }
 
     private ElasticBeanstalkEnvironmentSetting provisionIamInstanceProfile(String iamInstanceProfileName) {
@@ -26,6 +30,38 @@ public class EBEnvSetting implements Provisonable<List<ElasticBeanstalkEnvironme
                 .namespace("aws:autoscaling:launchconfiguration")
                 .name("IamInstanceProfile")
                 .value(iamInstanceProfileName)
+                .build();
+    }
+
+    private ElasticBeanstalkEnvironmentSetting provisionEBCWLogHealth() {
+        return ElasticBeanstalkEnvironmentSetting.builder()
+                .namespace("aws:elasticbeanstalk:cloudwatch:logs:health")
+                .name("HealthStreamingEnabled")
+                .value("true")
+                .build();
+    }
+
+    private ElasticBeanstalkEnvironmentSetting provisionKeyPair() {
+        return ElasticBeanstalkEnvironmentSetting.builder()
+                .namespace("aws:autoscaling:launchconfiguration")
+                .name("EC2KeyName")
+                .value("freetier-template")
+                .build();
+    }
+
+    private ElasticBeanstalkEnvironmentSetting provisionInstanceType() {
+        return ElasticBeanstalkEnvironmentSetting.builder()
+                .namespace("aws:autoscaling:launchconfiguration")
+                .name("InstanceType")
+                .value("t3.micro")
+                .build();
+    }
+
+    private ElasticBeanstalkEnvironmentSetting provisionEBCWStreamLogs() {
+        return ElasticBeanstalkEnvironmentSetting.builder()
+                .namespace("aws:elasticbeanstalk:cloudwatch:logs")
+                .name("StreamLogs")
+                .value("true")
                 .build();
     }
 }
