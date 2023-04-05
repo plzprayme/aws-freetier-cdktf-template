@@ -45,14 +45,13 @@ TF_TOKEN="Your Terraform Cloud Token"
 
 #### Configuration variables
 you want run this proejct. you must export variables.   
-Check `Configuration, Constant` classes under the `constant` package.  
+Check `Configuration, Constant` classes under the `constant` package.
 
 
 ### Deploy
-Place your application (docker, jar , python, js file... whatever elastic beanstalk solution stack) under $SOURCE_BUNDLE_PATH  
+Place your application (docker, jar , python, js file... whatever elastic beanstalk solution stack) under $SOURCE_BUNDLE_PATH
 
 and just type `cdktf deploy`
 
 ### Reference
 * https://registry.terraform.io/providers/hashicorp/aws/latest/docs#argument-reference
-
