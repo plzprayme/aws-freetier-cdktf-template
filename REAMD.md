@@ -9,7 +9,34 @@ deployed infrastructure will be very powerful:
 * RDBMS
 * DNS
 
-## How to us
+## How to use
+
+### .env.tmpl
+
+```text
+REGION="Your AWS Account Region"
+AWS_ACCESS_KEY="Your AWS ACCESS KEY"
+AWS_SECRET_KEY="Your AWS SECRET KEY"
+
+DOMAIN_NAME="Your Domain Name"
+NAME_SERVER_NAME1="Your Domain's NameServer1"
+NAME_SERVER_NAME2="Your Domain's NameServer2"
+NAME_SERVER_NAME3="Your Domain's NameServer3"
+NAME_SERVER_NAME4="Your Domain's NameServer4"
+DOMAIN_DURATION="Your Domain's DURATION"
+
+PROJECT_NAME="Prefix all of the resource"
+COMMIT_HASH="Your Git Commit's Hash"
+
+EB_SOLUTION_STACK="EC2's Application Runtime"
+SOURCE_BUNDLE_PATH="The local location of the JAR file running on EC2. (The reason why this is necessary is because when tf deploy is performed, the JAR file to be deployed to S3 is uploaded. So S3 needs to know where the JAR file is located.)"
+
+TF_CLOUD_ORGANIZATION="Terraform Workapce name"
+TF_WORKSPACE="Terraform Workspace ID"
+TF_TOKEN="Your Terraform Cloud Token"
+```
+
+
 ### Prerequisites
 * [The Terraform CLI (1.1+).](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 * [Node.js and npm v16+.](https://nodejs.org/en/)
@@ -18,18 +45,14 @@ deployed infrastructure will be very powerful:
 
 #### Configuration variables
 you want run this proejct. you must export variables.   
-Check `Configuration, Constant` classes under the `constant` package.
+Check `Configuration, Constant` classes under the `constant` package.  
+
 
 ### Deploy
-Place your application (docker, jar , python, js file... whatever elastic beanstalk solution stack) under $SOURCE_BUNDLE_PATH
+Place your application (docker, jar , python, js file... whatever elastic beanstalk solution stack) under $SOURCE_BUNDLE_PATH  
 
 and just type `cdktf deploy`
 
 ### Reference
 * https://registry.terraform.io/providers/hashicorp/aws/latest/docs#argument-reference
 
-### 온보딩
-1. `cp .env.tmpl .env`
-2. `.env` 에 값 채워넣기
-3. `source .env`
-4. `cdktf plan`
