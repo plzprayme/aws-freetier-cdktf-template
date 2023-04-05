@@ -1,0 +1,41 @@
+Index: REAMD.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/REAMD.md b/REAMD.md
+--- a/REAMD.md	(revision bdde9cb9b578582602b5911438140f82b89656f5)
++++ b/REAMD.md	(revision 29c6f9b2c985e3f4bf7cd1976fcbc880cbb81a31)
+@@ -11,6 +11,32 @@
+ 
+ ## How to use
+ 
++### .env.tmpl
++
++```text
++REGION="Your AWS Account Region"
++AWS_ACCESS_KEY="Your AWS ACCESS KEY"
++AWS_SECRET_KEY="Your AWS SECRET KEY"
++
++DOMAIN_NAME="Your Domain Name"
++NAME_SERVER_NAME1="Your Domain's NameServer1"
++NAME_SERVER_NAME2="Your Domain's NameServer2"
++NAME_SERVER_NAME3="Your Domain's NameServer3"
++NAME_SERVER_NAME4="Your Domain's NameServer4"
++DOMAIN_DURATION="Your Domain's DURATION"
++
++PROJECT_NAME="Prefix all of the resource"
++COMMIT_HASH="Your Git Commit's Hash"
++
++EB_SOLUTION_STACK="EC2's Application Runtime"
++SOURCE_BUNDLE_PATH="The local location of the JAR file running on EC2. (The reason why this is necessary is because when tf deploy is performed, the JAR file to be deployed to S3 is uploaded. So S3 needs to know where the JAR file is located.)"
++
++TF_CLOUD_ORGANIZATION="Terraform Workapce name"
++TF_WORKSPACE="Terraform Workspace ID"
++TF_TOKEN="Your Terraform Cloud Token"
++```
++
++
+ ### Prerequisites
+ * [The Terraform CLI (1.1+).](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+ * [Node.js and npm v16+.](https://nodejs.org/en/)
