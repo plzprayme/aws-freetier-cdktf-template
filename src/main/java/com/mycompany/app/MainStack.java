@@ -8,6 +8,7 @@ import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_environment.ElasticBe
 import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_environment.ElasticBeanstalkEnvironmentSetting;
 import com.hashicorp.cdktf.providers.aws.iam_instance_profile.IamInstanceProfile;
 import com.hashicorp.cdktf.providers.aws.iam_role.IamRole;
+import com.hashicorp.cdktf.providers.aws.route53_domains_registered_domain.Route53DomainsRegisteredDomain;
 import com.hashicorp.cdktf.providers.aws.s3_bucket.S3Bucket;
 import com.hashicorp.cdktf.providers.aws.s3_object.S3Object;
 import com.mycompany.app.constant.Configuration;
@@ -16,6 +17,7 @@ import com.mycompany.app.construct.aws.iam.role.EBIamRole;
 import com.mycompany.app.construct.aws.provider.AwsProvider;
 import com.mycompany.app.construct.aws.resource.cloud_watch.CWLogGroup;
 import com.mycompany.app.construct.aws.resource.eb.*;
+import com.mycompany.app.construct.aws.resource.route53.Route53DomainRegister;
 import com.mycompany.app.construct.aws.resource.s3.SourceBundleS3Bucket;
 import com.mycompany.app.construct.aws.resource.s3.SourceBundleS3Object;
 import software.constructs.Construct;
@@ -56,6 +58,9 @@ public class MainStack extends TerraformStack {
         IamInstanceProfile profile = new EBIamInstanceProfile(role).provision(scope);
         List<ElasticBeanstalkEnvironmentSetting> settings = new EBEnvSetting(profile).provision(scope);
         ElasticBeanstalkEnvironment ebEnv = new EBEnv(ebApp, ebAppVer, settings).provision(scope);
+
+        // Route53 서비스 추가
+        Route53DomainsRegisteredDomain route53 = new Route53DomainRegister().provision(scope);
         
         return ebApp;
     }
