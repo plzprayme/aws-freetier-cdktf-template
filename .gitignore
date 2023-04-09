@@ -242,3 +242,4 @@ cdktf.log
 .vscode
 *.iml
 target/
+.env
