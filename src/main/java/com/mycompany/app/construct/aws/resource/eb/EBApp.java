@@ -1,7 +1,6 @@
 package com.mycompany.app.construct.aws.resource.eb;
 
 import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_application.ElasticBeanstalkApplication;
-import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_application_version.ElasticBeanstalkApplicationVersion;
 import com.mycompany.app.constant.Constant;
 import com.mycompany.app.construct.Provisonable;
 import lombok.RequiredArgsConstructor;
