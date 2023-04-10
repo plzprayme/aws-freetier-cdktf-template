@@ -4,13 +4,8 @@ import static com.mycompany.app.constant.Configuration.Aws.NAME_SERVER_NAME1;
 import static com.mycompany.app.constant.Configuration.Aws.NAME_SERVER_NAME2;
 import static com.mycompany.app.constant.Configuration.Aws.NAME_SERVER_NAME3;
 import static com.mycompany.app.constant.Configuration.Aws.NAME_SERVER_NAME4;
+import static com.mycompany.app.constant.Constant.Version.PROJECT_NAME;
 
-import com.amazonaws.services.route53domains.AmazonRoute53Domains;
-import com.amazonaws.services.route53domains.AmazonRoute53DomainsClientBuilder;
-import com.amazonaws.services.route53domains.model.ContactDetail;
-import com.amazonaws.services.route53domains.model.DomainLimitExceededException;
-import com.amazonaws.services.route53domains.model.InvalidInputException;
-import com.amazonaws.services.route53domains.model.RegisterDomainRequest;
 import com.hashicorp.cdktf.IResolvable;
 import com.hashicorp.cdktf.providers.aws.route53_domains_registered_domain.Route53DomainsRegisteredDomain;
 import com.mycompany.app.constant.Configuration.Aws;
@@ -36,8 +31,11 @@ The name_server Name_Server object supports the following:
 
 public class Route53DomainRegister implements Provisonable<Route53DomainsRegisteredDomain> {
 
+    private final String DOMAIN_REGISTER_COMPONENT = PROJECT_NAME + "-domains-registers";
+
     // 등록할 도메인 이름
     private final String DOMAIN_NAME = Aws.DOMAIN_NAME;
+
     // 네임서버 이름
     private final List<String> NAME_SERVER_NAME = List.of(
         NAME_SERVER_NAME1,
@@ -45,20 +43,18 @@ public class Route53DomainRegister implements Provisonable<Route53DomainsRegiste
         NAME_SERVER_NAME3,
         NAME_SERVER_NAME4
     );
-    // 도메인 등록 기간
-    private final Integer DOMAIN_DURATION = Aws.DOMAIN_DURATION;
 
     @Override
     public Route53DomainsRegisteredDomain provision(Construct scope) {
-        enrollRoute53DomainByCollaboratingAwsSdk();
 
         return Route53DomainsRegisteredDomain.Builder
-            .create(scope, "test")
+            .create(scope, DOMAIN_REGISTER_COMPONENT)
             .domainName(DOMAIN_NAME)
             .nameServer((IResolvable) NAME_SERVER_NAME)
             .build();
     }
 
+    /*
     // AWS에 도메인 등록하기
     private void enrollRoute53DomainByCollaboratingAwsSdk() {
         // 클라이언트 받아오기
@@ -86,4 +82,5 @@ public class Route53DomainRegister implements Provisonable<Route53DomainsRegiste
             System.err.println("Invalid input: " + e.getMessage());
         }
     }
+    */
 }
