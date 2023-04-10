@@ -17,7 +17,6 @@ public class Configuration {
         public static String NAME_SERVER_NAME2 = ENV.get("NAME_SERVER_NAME2");
         public static String NAME_SERVER_NAME3 = ENV.get("NAME_SERVER_NAME3");
         public static String NAME_SERVER_NAME4 = ENV.get("NAME_SERVER_NAME4");
-        public static Integer DOMAIN_DURATION = Integer.valueOf(ENV.get("DOMAIN_DURATION"));
     }
 
     public static class TFCloud {
