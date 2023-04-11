@@ -6,8 +6,9 @@ import static com.mycompany.app.constant.Configuration.Aws.NAME_SERVER_NAME3;
 import static com.mycompany.app.constant.Configuration.Aws.NAME_SERVER_NAME4;
 import static com.mycompany.app.constant.Constant.Version.PROJECT_NAME;
 
-import com.hashicorp.cdktf.IResolvable;
 import com.hashicorp.cdktf.providers.aws.route53_domains_registered_domain.Route53DomainsRegisteredDomain;
+import com.hashicorp.cdktf.providers.aws.route53_domains_registered_domain.Route53DomainsRegisteredDomain.Builder;
+import com.hashicorp.cdktf.providers.aws.route53_domains_registered_domain.Route53DomainsRegisteredDomainNameServer;
 import com.mycompany.app.constant.Configuration.Aws;
 import com.mycompany.app.construct.Provisonable;
 import java.util.List;
@@ -36,22 +37,51 @@ public class Route53DomainRegister implements Provisonable<Route53DomainsRegiste
     // 등록할 도메인 이름
     private final String DOMAIN_NAME = Aws.DOMAIN_NAME;
 
-    // 네임서버 이름
-    private final List<String> NAME_SERVER_NAME = List.of(
-        NAME_SERVER_NAME1,
-        NAME_SERVER_NAME2,
-        NAME_SERVER_NAME3,
-        NAME_SERVER_NAME4
-    );
+    private final Route53DomainsRegisteredDomainNameServer nameServer1 =
+        Route53DomainsRegisteredDomainNameServer.builder()
+            .name(NAME_SERVER_NAME1)
+            .build();
+
+    private final Route53DomainsRegisteredDomainNameServer nameServer2 =
+        Route53DomainsRegisteredDomainNameServer.builder()
+            .name(NAME_SERVER_NAME2)
+            .build();
+
+    private final Route53DomainsRegisteredDomainNameServer nameServer3 =
+        Route53DomainsRegisteredDomainNameServer.builder()
+            .name(NAME_SERVER_NAME3)
+            .build();
+
+    private final Route53DomainsRegisteredDomainNameServer nameServer4 =
+        Route53DomainsRegisteredDomainNameServer.builder()
+            .name(NAME_SERVER_NAME4)
+            .build();
 
     @Override
     public Route53DomainsRegisteredDomain provision(Construct scope) {
+        List<Route53DomainsRegisteredDomainNameServer> nameServers =
+            List.of(nameServer1, nameServer2, nameServer3, nameServer4);
 
-        return Route53DomainsRegisteredDomain.Builder
+        Route53DomainsRegisteredDomain route53DomainsRegisteredDomain = Builder
             .create(scope, DOMAIN_REGISTER_COMPONENT)
             .domainName(DOMAIN_NAME)
-            .nameServer((IResolvable) NAME_SERVER_NAME)
+            .nameServer(nameServers)
             .build();
+
+        printResult(nameServers);
+
+        return route53DomainsRegisteredDomain;
+    }
+
+    private void printResult(List<Route53DomainsRegisteredDomainNameServer> nameServers) {
+        System.out.println("------------------------------------");
+        System.out.println(DOMAIN_NAME + " <---- Domain registration complete");
+        int i = 1;
+        for (Route53DomainsRegisteredDomainNameServer nameServer : nameServers) {
+            System.out.println("NameServer " + i + " : " + nameServer.getName());
+            i ++;
+        }
+        System.out.println("------------------------------------");
     }
 
     /*
