@@ -85,7 +85,11 @@ public class Route53DomainRegister implements Provisonable<Route53DomainsRegiste
     }
 
     /*
-    // AWS에 도메인 등록하기
+    AWS에 도메인 등록하기
+    이 기능을 하면 도메인 이름을 입력받고 그 내용을 바탕으로 도메인 구입까지 가능하긴 할듯하지만
+    도메인 네임이 중복된다던가, 결제가 실패한다던가의 경우 예외를 어떻게 처리할지?
+    고민 되는 부분으로 남아있다!
+
     private void enrollRoute53DomainByCollaboratingAwsSdk() {
         // 클라이언트 받아오기
         AmazonRoute53Domains client = AmazonRoute53DomainsClientBuilder.standard().build();

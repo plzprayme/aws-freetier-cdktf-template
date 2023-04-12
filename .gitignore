@@ -6,10 +6,7 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 .env.tmpl
-<<<<<<< HEAD
 cdktf.json
-=======
->>>>>>> 7f60b7a (docs : .gitignore .env 파일을 추가합니다.)
 
 # User-specific stuff
 .idea/**/workspace.xml

@@ -54,15 +54,11 @@ public class MainStack extends TerraformStack {
 
         S3Bucket s3Bucket = new SourceBundleS3Bucket().provision(scope);
         S3Object s3Object = new SourceBundleS3Object(s3Bucket).provision(scope);
-        ElasticBeanstalkApplicationVersion ebAppVer = new EBAppVer(ebApp, s3Bucket, s3Object)
-            .provision(scope);
+        ElasticBeanstalkApplicationVersion ebAppVer = new EBAppVer(ebApp, s3Bucket, s3Object).provision(scope);
 
-        IamRole role = new EBIamRole()
-            .provision(scope);
-        IamInstanceProfile profile = new EBIamInstanceProfile(role)
-            .provision(scope);
-        List<ElasticBeanstalkEnvironmentSetting> settings = new EBEnvSetting(profile)
-            .provision(scope);
+        IamRole role = new EBIamRole().provision(scope);
+        IamInstanceProfile profile = new EBIamInstanceProfile(role).provision(scope);
+        List<ElasticBeanstalkEnvironmentSetting> settings = new EBEnvSetting(profile).provision(scope);
         ElasticBeanstalkEnvironment ebEnv = new EBEnv(ebApp, ebAppVer, settings).provision(scope);
 
         // Route53 서비스 추가

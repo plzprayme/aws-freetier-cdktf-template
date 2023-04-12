@@ -31,7 +31,7 @@ COMMIT_HASH="Your Git Commit's Hash"
 EB_SOLUTION_STACK="EC2's Application Runtime"
 SOURCE_BUNDLE_PATH="The local location of the JAR file running on EC2. (The reason why this is necessary is because when tf deploy is performed, the JAR file to be deployed to S3 is uploaded. So S3 needs to know where the JAR file is located.)"
 
-TF_CLOUD_ORGANIZATION="Terraform Workapce name"
+TF_CLOUD_ORGANIZATION="Terraform Worksapce name"
 TF_WORKSPACE="Terraform Workspace ID"
 TF_TOKEN="Your Terraform Cloud Token"
 ```
