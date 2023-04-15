@@ -20,11 +20,19 @@ public class SourceBundleS3Object implements Provisonable<S3Object> {
 
     @Override
     public S3Object provision(Construct scope) {
+        final String objectKey = generateObjectKey();
         return S3Object.Builder.create(scope, ID)
                 .bucket(bucketName)
-                .key(OBJECT_KEY)
+                .key(objectKey)
                 .source(SOURCE_PATH)
                 .acl("private")
                 .build();
     }
+
+    private String generateObjectKey() {
+        String[] splited = SOURCE_PATH.split("/");
+        final String sourceFileName = splited[splited.length - 1];
+        return Constant.Version.VERSION + sourceFileName;
+    }
+
 }

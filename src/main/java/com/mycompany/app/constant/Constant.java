@@ -12,8 +12,7 @@ public class Constant {
         public static String COMMIT_HASH = ENV.get("COMMIT_HASH");
         public static LocalDateTime TIMESTAMP = LocalDateTime.now();
 
-        public static String VERSION =
-                String.join("-", new String[] {PROJECT_NAME, COMMIT_HASH.substring(0, 5), TIMESTAMP.toString()});
+        public static String VERSION = PROJECT_NAME + COMMIT_HASH.substring(0, 5) + TIMESTAMP;
     }
 
     public static class Resource {
