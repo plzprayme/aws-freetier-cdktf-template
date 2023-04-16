@@ -13,7 +13,6 @@ public class SourceBundleS3Bucket implements Provisonable<S3Bucket> {
     public S3Bucket provision(Construct scope) {
         return S3Bucket.Builder.create(scope, NAME)
                 .bucket(NAME)
-                .acl("private")
                 .build();
     }
 }
