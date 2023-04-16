@@ -11,6 +11,7 @@ import com.hashicorp.cdktf.providers.aws.route53_domains_registered_domain.Route
 import com.hashicorp.cdktf.providers.aws.route53_domains_registered_domain.Route53DomainsRegisteredDomainNameServer;
 import com.mycompany.app.constant.Configuration.Aws;
 import com.mycompany.app.construct.Provisonable;
+import com.mycompany.app.construct.aws.resource.eb.EBApp;
 import java.util.List;
 import software.constructs.Construct;
 
@@ -31,6 +32,8 @@ The name_server Name_Server object supports the following:
  */
 
 public class Route53DomainRegister implements Provisonable<Route53DomainsRegisteredDomain> {
+
+    private final EBApp ebApp = new EBApp();
 
     private final String DOMAIN_REGISTER_COMPONENT = PROJECT_NAME + "-domains-registers";
 
@@ -79,7 +82,7 @@ public class Route53DomainRegister implements Provisonable<Route53DomainsRegiste
         int i = 1;
         for (Route53DomainsRegisteredDomainNameServer nameServer : nameServers) {
             System.out.println("NameServer " + i + " : " + nameServer.getName());
-            i ++;
+            i++;
         }
         System.out.println("------------------------------------");
     }
