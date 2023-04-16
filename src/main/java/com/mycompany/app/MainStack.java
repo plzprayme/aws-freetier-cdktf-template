@@ -10,6 +10,7 @@ import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_environment.ElasticBe
 import com.hashicorp.cdktf.providers.aws.iam_instance_profile.IamInstanceProfile;
 import com.hashicorp.cdktf.providers.aws.iam_role.IamRole;
 import com.hashicorp.cdktf.providers.aws.route53_domains_registered_domain.Route53DomainsRegisteredDomain;
+import com.hashicorp.cdktf.providers.aws.route53_record.Route53Record;
 import com.hashicorp.cdktf.providers.aws.s3_bucket.S3Bucket;
 import com.hashicorp.cdktf.providers.aws.s3_object.S3Object;
 import com.mycompany.app.constant.Configuration;
@@ -21,6 +22,7 @@ import com.mycompany.app.construct.aws.resource.eb.EBApp;
 import com.mycompany.app.construct.aws.resource.eb.EBAppVer;
 import com.mycompany.app.construct.aws.resource.eb.EBEnv;
 import com.mycompany.app.construct.aws.resource.eb.EBEnvSetting;
+import com.mycompany.app.construct.aws.resource.route53.Route53AttachEB;
 import com.mycompany.app.construct.aws.resource.route53.Route53DomainRegister;
 import com.mycompany.app.construct.aws.resource.s3.SourceBundleS3Bucket;
 import com.mycompany.app.construct.aws.resource.s3.SourceBundleS3Object;
@@ -54,19 +56,22 @@ public class MainStack extends TerraformStack {
 
         S3Bucket s3Bucket = new SourceBundleS3Bucket().provision(scope);
         S3Object s3Object = new SourceBundleS3Object(s3Bucket).provision(scope);
-        ElasticBeanstalkApplicationVersion ebAppVer = new EBAppVer(ebApp, s3Bucket, s3Object)
-            .provision(scope);
+        ElasticBeanstalkApplicationVersion ebAppVer =
+            new EBAppVer(
+                ebApp,
+                s3Bucket,
+                s3Object
+            ).provision(scope);
 
-        IamRole role = new EBIamRole()
-            .provision(scope);
-        IamInstanceProfile profile = new EBIamInstanceProfile(role)
-            .provision(scope);
-        List<ElasticBeanstalkEnvironmentSetting> settings = new EBEnvSetting(profile)
-            .provision(scope);
+        IamRole role = new EBIamRole().provision(scope);
+        IamInstanceProfile profile = new EBIamInstanceProfile(role).provision(scope);
+        List<ElasticBeanstalkEnvironmentSetting> settings =
+            new EBEnvSetting(profile)
+                .provision(scope);
         ElasticBeanstalkEnvironment ebEnv = new EBEnv(ebApp, ebAppVer, settings).provision(scope);
 
-        // Route53 서비스 추가
         Route53DomainsRegisteredDomain route53 = new Route53DomainRegister().provision(scope);
+        Route53Record route53AttachEB = new Route53AttachEB(ebEnv.getEndpointUrl()).provision(scope);
 
         return ebApp;
     }
