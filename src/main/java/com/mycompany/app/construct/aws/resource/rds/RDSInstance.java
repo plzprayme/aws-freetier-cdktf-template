@@ -9,19 +9,16 @@ import software.constructs.Construct;
 // preprocess : create default vpc
 public class RDSInstance implements Provisonable<DbInstance> {
     private final String instanceClass = "db.t3.micro";
-    private final String engine = "mysql";
-    private final String engineVersion = "8.0";
+    private final String engine = Constant.Resource.RDS.ENGINE;
+    private final String engineVersion = Constant.Resource.RDS.ENGINE_VERSION;
     // DBName must begin with a letter and contain only alphanumeric characters.
-    private final String dbName = Constant.Version.PROJECT_NAME + "DB";
-    // only lowercase alphanumeric characters and hyphens allowed
-    private final String identifier = Constant.Version.PROJECT_NAME + "-db";
-    private final String initUserName = Constant.Resource.RDS.RDS_USER_NAME;
-    private final String initPassword = Constant.Resource.RDS.RDS_PASSWORD;
+    private final String dbName = Constant.Resource.RDS.DB_NAME;
+    private final String initUserName = Constant.Resource.RDS.USER_NAME;
+    private final String initPassword = Constant.Resource.RDS.PASSWORD;
 
     @Override
     public DbInstance provision(Construct scope) {
         return DbInstance.Builder.create(scope, dbName)
-                .identifier(identifier)
                 .engine(engine)
                 .engineVersion(engineVersion)
                 .allocatedStorage(10)

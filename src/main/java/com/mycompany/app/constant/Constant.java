@@ -27,8 +27,11 @@ public class Constant {
         }
 
         public static class RDS {
-            public static String RDS_USER_NAME = ENV.get("RDS_USER_NAME");
-            public static String RDS_PASSWORD = ENV.get("RDS_PASSWORD");
+            public static String DB_NAME = ENV.get("DB_NAME");
+            public static String ENGINE = ENV.get("DB_ENGINE");
+            public static String ENGINE_VERSION = ENV.get("DB_ENGINE_VERSION");
+            public static String USER_NAME = ENV.get("RDS_USER_NAME");
+            public static String PASSWORD = ENV.get("RDS_PASSWORD");
         }
     }
 }
