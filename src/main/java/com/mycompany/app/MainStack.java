@@ -9,7 +9,6 @@ import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_environment.ElasticBe
 import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_environment.ElasticBeanstalkEnvironmentSetting;
 import com.hashicorp.cdktf.providers.aws.iam_instance_profile.IamInstanceProfile;
 import com.hashicorp.cdktf.providers.aws.iam_role.IamRole;
-import com.hashicorp.cdktf.providers.aws.route53_domains_registered_domain.Route53DomainsRegisteredDomain;
 import com.hashicorp.cdktf.providers.aws.route53_record.Route53Record;
 import com.hashicorp.cdktf.providers.aws.s3_bucket.S3Bucket;
 import com.hashicorp.cdktf.providers.aws.s3_object.S3Object;
@@ -22,8 +21,7 @@ import com.mycompany.app.construct.aws.resource.eb.EBApp;
 import com.mycompany.app.construct.aws.resource.eb.EBAppVer;
 import com.mycompany.app.construct.aws.resource.eb.EBEnv;
 import com.mycompany.app.construct.aws.resource.eb.EBEnvSetting;
-import com.mycompany.app.construct.aws.resource.route53.Route53AttachEB;
-import com.mycompany.app.construct.aws.resource.route53.Route53DomainRegister;
+import com.mycompany.app.construct.aws.resource.route53.Route53RecordDriver;
 import com.mycompany.app.construct.aws.resource.s3.SourceBundleS3Bucket;
 import com.mycompany.app.construct.aws.resource.s3.SourceBundleS3Object;
 import java.util.List;
@@ -70,8 +68,7 @@ public class MainStack extends TerraformStack {
                 .provision(scope);
         ElasticBeanstalkEnvironment ebEnv = new EBEnv(ebApp, ebAppVer, settings).provision(scope);
 
-        Route53DomainsRegisteredDomain route53 = new Route53DomainRegister().provision(scope);
-        Route53Record route53AttachEB = new Route53AttachEB(ebEnv.getEndpointUrl()).provision(scope);
+        Route53Record route53Record = new Route53RecordDriver(ebEnv.getEndpointUrl()).provision(scope);
 
         return ebApp;
     }

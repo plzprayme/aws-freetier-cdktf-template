@@ -11,12 +11,7 @@ public class Configuration {
         public static String AWS_ACCESS_KEY = ENV.get("AWS_ACCESS_KEY");
         public static String AWS_SECRET_KEY = ENV.get("AWS_SECRET_KEY");
         public static String REGION = ENV.get("REGION");
-
-        public static String DOMAIN_NAME = ENV.get("DOMAIN_NAME");
-        public static String NAME_SERVER_NAME1 = ENV.get("NAME_SERVER_NAME1");
-        public static String NAME_SERVER_NAME2 = ENV.get("NAME_SERVER_NAME2");
-        public static String NAME_SERVER_NAME3 = ENV.get("NAME_SERVER_NAME3");
-        public static String NAME_SERVER_NAME4 = ENV.get("NAME_SERVER_NAME4");
+        public static String SUB_DOMAIN_NAME = ENV.get("SUB_DOMAIN_NAME");
         public static String HOSTED_ZONE_ID = ENV.get("HOSTED_ZONE_ID");
     }
 
