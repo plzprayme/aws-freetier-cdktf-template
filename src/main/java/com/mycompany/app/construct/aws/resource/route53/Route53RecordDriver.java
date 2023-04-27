@@ -6,7 +6,6 @@ import static com.mycompany.app.constant.Constant.Version.PROJECT_NAME;
 import com.hashicorp.cdktf.providers.aws.route53_record.Route53Record;
 import com.mycompany.app.constant.Configuration.Aws;
 import com.mycompany.app.construct.Provisonable;
-import com.mycompany.app.construct.aws.resource.eb.EBApp;
 import java.util.Collections;
 import software.constructs.Construct;
 
@@ -29,8 +28,6 @@ import software.constructs.Construct;
  */
 
 public class Route53RecordDriver implements Provisonable<Route53Record> {
-
-    private final EBApp ebApp = new EBApp();
 
     private final String DOMAIN_REGISTER_COMPONENT = PROJECT_NAME + "-domains-registers";
 
