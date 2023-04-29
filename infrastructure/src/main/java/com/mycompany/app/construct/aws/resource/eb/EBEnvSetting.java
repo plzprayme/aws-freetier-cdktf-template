@@ -2,6 +2,7 @@ package com.mycompany.app.construct.aws.resource.eb;
 
 import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_environment.ElasticBeanstalkEnvironmentSetting;
 import com.hashicorp.cdktf.providers.aws.iam_instance_profile.IamInstanceProfile;
+import com.mycompany.app.constant.Constant;
 import com.mycompany.app.construct.Provisonable;
 import software.constructs.Construct;
 
@@ -45,7 +46,7 @@ public class EBEnvSetting implements Provisonable<List<ElasticBeanstalkEnvironme
         return ElasticBeanstalkEnvironmentSetting.builder()
                 .namespace("aws:autoscaling:launchconfiguration")
                 .name("EC2KeyName")
-                .value("freetier-template")
+                .value(Constant.Resource.ElasticBeanstalk.KEY_PAIR_NAME)
                 .build();
     }
 

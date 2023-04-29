@@ -1,6 +1,7 @@
 package com.mycompany.app.construct.aws.iam.role;
 
 import com.hashicorp.cdktf.providers.aws.iam_role.IamRole;
+import com.mycompany.app.constant.Constant;
 import com.mycompany.app.construct.Provisonable;
 import software.constructs.Construct;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class EBIamRole implements Provisonable<IamRole> {
 
-    private final String NAME = "eb-iam-role";
+    private final String NAME = Constant.Version.PROJECT_NAME + "-eb-iam-role";
 
     private final List<String> policyArn = List.of(
             "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier",
