@@ -11,8 +11,6 @@ public class Configuration {
         public static String AWS_ACCESS_KEY = ENV.get("AWS_ACCESS_KEY");
         public static String AWS_SECRET_KEY = ENV.get("AWS_SECRET_KEY");
         public static String REGION = ENV.get("REGION");
-        public static String SUB_DOMAIN_NAME = ENV.get("SUB_DOMAIN_NAME");
-        public static String HOSTED_ZONE_ID = ENV.get("HOSTED_ZONE_ID");
     }
 
     public static class TFCloud {

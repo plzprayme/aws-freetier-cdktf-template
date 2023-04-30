@@ -1,10 +1,10 @@
 package com.mycompany.app.construct.aws.resource.route53;
 
-import static com.mycompany.app.constant.Configuration.Aws.HOSTED_ZONE_ID;
+import static com.mycompany.app.constant.Constant.Resource.Route53.HOSTED_ZONE_ID;
 import static com.mycompany.app.constant.Constant.Version.PROJECT_NAME;
 
 import com.hashicorp.cdktf.providers.aws.route53_record.Route53Record;
-import com.mycompany.app.constant.Configuration.Aws;
+import com.mycompany.app.constant.Constant.Resource.Route53;
 import com.mycompany.app.construct.Provisonable;
 import java.util.Collections;
 import software.constructs.Construct;
@@ -32,7 +32,7 @@ public class Route53RecordDriver implements Provisonable<Route53Record> {
     private final String DOMAIN_REGISTER_COMPONENT = PROJECT_NAME + "-domains-registers";
 
     // 등록할 도메인 이름
-    private final String SUB_DOMAIN_NAME = Aws.SUB_DOMAIN_NAME;
+    private final String SUB_DOMAIN_NAME = Route53.SUB_DOMAIN_NAME;
 
     private final String EB_ENDPOINT;
 

@@ -24,8 +24,6 @@ import com.mycompany.app.construct.aws.resource.eb.EBEnv;
 import com.mycompany.app.construct.aws.resource.eb.EBEnvSetting;
 <<<<<<< HEAD:src/main/java/com/mycompany/app/MainStack.java
 import com.mycompany.app.construct.aws.resource.route53.Route53RecordDriver;
-import com.mycompany.app.construct.aws.resource.s3.SourceBundleS3Bucket;
-import com.mycompany.app.construct.aws.resource.s3.SourceBundleS3Object;
 =======
 import com.mycompany.app.construct.aws.resource.rds.RDSInstance;
 import com.mycompany.app.construct.aws.resource.s3.SourceBundleS3Bucket;
@@ -35,7 +33,6 @@ import software.constructs.Construct;
 
 >>>>>>> 7e25324b52cec06d1884c6529288e1b10e2101dd:infrastructure/src/main/java/com/mycompany/app/MainStack.java
 import java.util.List;
-import software.constructs.Construct;
 
 // aws provider argument docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs#argument-reference
 public class MainStack extends TerraformStack {

@@ -8,6 +8,7 @@ import software.constructs.Construct;
 // ref : https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html
 // preprocess : create default vpc
 public class RDSInstance implements Provisonable<DbInstance> {
+
     private final String instanceClass = "db.t3.micro";
     private final String engine = Constant.Resource.RDS.ENGINE;
     private final String engineVersion = Constant.Resource.RDS.ENGINE_VERSION;
@@ -19,15 +20,15 @@ public class RDSInstance implements Provisonable<DbInstance> {
     @Override
     public DbInstance provision(Construct scope) {
         return DbInstance.Builder.create(scope, dbName)
-                .engine(engine)
-                .engineVersion(engineVersion)
-                .allocatedStorage(10)
-                .instanceClass(instanceClass)
-                .dbName(dbName)
-                .username(initUserName)
-                .password(initPassword)
-                .skipFinalSnapshot(true)
-                .build();
+            .engine(engine)
+            .engineVersion(engineVersion)
+            .allocatedStorage(10)
+            .instanceClass(instanceClass)
+            .dbName(dbName)
+            .username(initUserName)
+            .password(initPassword)
+            .skipFinalSnapshot(true)
+            .build();
 
         // skipFinalSnapshot (default : false) :
         // the option is "false" : if you run "cdktf destroy" command,
