@@ -2,12 +2,13 @@ package com.mycompany.app.construct.aws.iam.profile;
 
 import com.hashicorp.cdktf.providers.aws.iam_instance_profile.IamInstanceProfile;
 import com.hashicorp.cdktf.providers.aws.iam_role.IamRole;
+import com.mycompany.app.constant.Constant;
 import com.mycompany.app.construct.Provisonable;
 import software.constructs.Construct;
 
 public class EBIamInstanceProfile implements Provisonable<IamInstanceProfile> {
 
-    private final String NAME = "eb-iam-instance-profile";
+    private final String NAME = Constant.Version.PROJECT_NAME + "-eb-iam-instance-profile";
     private final String roleName;
 
     public EBIamInstanceProfile(IamRole role) {

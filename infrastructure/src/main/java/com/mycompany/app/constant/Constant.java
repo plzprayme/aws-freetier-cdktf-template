@@ -20,6 +20,7 @@ public class Constant {
 
         public static class ElasticBeanstalk {
             public static String SOLUTION_STACK = ENV.get("EB_SOLUTION_STACK");
+            public static String KEY_PAIR_NAME = ENV.get("EC2_KEYPAIR_NAME");
         }
 
         public static class S3 {
