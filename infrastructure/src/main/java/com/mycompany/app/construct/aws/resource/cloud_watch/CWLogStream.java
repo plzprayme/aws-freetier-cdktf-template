@@ -1,4 +1,4 @@
-package com.mycompany.app;
+package com.mycompany.app.construct.aws.resource.cloud_watch;
 
 import com.hashicorp.cdktf.providers.aws.cloudwatch_log_group.CloudwatchLogGroup;
 import com.hashicorp.cdktf.providers.aws.cloudwatch_log_stream.CloudwatchLogStream;
@@ -12,8 +12,7 @@ public class CWLogStream implements Provisonable<CloudwatchLogStream> {
 
     private final CloudwatchLogGroup logGroup;
     private final String id = Constant.Version.PROJECT_NAME + "_log_stream";
-    private final String name = Constant.Version.TIMESTAMP.toString().replaceAll(":", "-") +
-            Constant.Version.COMMIT_HASH;
+    private final String name = Constant.Version.TIMESTAMP.toString().replaceAll(":", "-");
 
     @Override
     public CloudwatchLogStream provision(Construct scope) {

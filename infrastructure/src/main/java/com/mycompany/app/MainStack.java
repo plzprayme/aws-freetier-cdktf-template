@@ -1,6 +1,5 @@
 package com.mycompany.app;
 
-import com.hashicorp.cdktf.TerraformOutput;
 import com.hashicorp.cdktf.TerraformStack;
 import com.hashicorp.cdktf.providers.aws.cloudwatch_log_group.CloudwatchLogGroup;
 import com.hashicorp.cdktf.providers.aws.cloudwatch_log_stream.CloudwatchLogStream;
@@ -16,6 +15,7 @@ import com.mycompany.app.construct.aws.iam.profile.EBIamInstanceProfile;
 import com.mycompany.app.construct.aws.iam.role.EBIamRole;
 import com.mycompany.app.construct.aws.provider.AwsProvider;
 import com.mycompany.app.construct.aws.resource.cloud_watch.CWLogGroup;
+import com.mycompany.app.construct.aws.resource.cloud_watch.CWLogStream;
 import com.mycompany.app.construct.aws.resource.eb.EBApp;
 import com.mycompany.app.construct.aws.resource.eb.EBEnv;
 import com.mycompany.app.construct.aws.resource.eb.EBEnvSetting;
