@@ -8,7 +8,8 @@ RUN apk update && \
     unzip terraform_1.1.0_linux_amd64.zip && \
     mv terraform /usr/local/bin/
 
-COPY ./infrastructure infrastructure
-RUN cd /infrastructure && cdktf provider add "aws@~>4.0"
+WORKDIR /home/infrastructure
+COPY ./infrastructure .
+RUN cdktf provider add "aws@~>4.0"
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
