@@ -243,3 +243,5 @@ cdktf.log
 *.iml
 target/
 infrastructure/.env
+infrastructure/.env-*
+
