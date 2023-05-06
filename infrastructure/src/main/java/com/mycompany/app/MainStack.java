@@ -10,6 +10,7 @@ import com.hashicorp.cdktf.providers.aws.elastic_beanstalk_environment.ElasticBe
 import com.hashicorp.cdktf.providers.aws.iam_instance_profile.IamInstanceProfile;
 import com.hashicorp.cdktf.providers.aws.iam_role.IamRole;
 import com.hashicorp.cdktf.providers.aws.s3_bucket.S3Bucket;
+import com.hashicorp.cdktf.providers.mongodbatlas.provider.MongodbatlasProvider;
 import com.mycompany.app.constant.Configuration;
 import com.mycompany.app.construct.aws.iam.profile.EBIamInstanceProfile;
 import com.mycompany.app.construct.aws.iam.role.EBIamRole;
@@ -44,14 +45,26 @@ public class MainStack extends TerraformStack {
         provisionRDS(this);
 
 
+        provisionMongoDB(this);
+
+
+
 
 //        https://blog.hbsmith.io/aws-elastic-beanstalk-amazon-linux2-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C%EC%9D%98-%EB%A1%9C%EA%B7%B8-%EC%BB%A4%EC%8A%A4%ED%84%B0%EB%A7%88%EC%9D%B4%EC%A7%95-amazon-cloudwatch-eb-web-console-1dcb9cc79316
 //        https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
     }
 
+    private void provisionMongoDB(MainStack mainStack) {
+
+    }
+
     private void provisionProvider(Construct scope) {
         new AwsProvider(Configuration.Aws.REGION, Configuration.Aws.AWS_ACCESS_KEY, Configuration.Aws.AWS_SECRET_KEY)
                 .provision(scope);
+
+        MongodbatlasProvider mongoProvider = new MongodbatlasProvider(this, "mongo-provider");
+        mongoProvider.setPublicKey(Configuration.MongoDB.ACCESS_KEY);
+        mongoProvider.setPrivateKey(Configuration.MongoDB.SECRET_KEY);
     }
 
     private ElasticBeanstalkApplication provisionElasticBeanstalk(Construct scope) {

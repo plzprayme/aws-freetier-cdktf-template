@@ -4,7 +4,7 @@
   "projectId": "f35852c3-3afb-47fd-80d6-f9f002607eb2",
   "sendCrashReports": "false",
   "codeMakerOutput": "src/main/java/imports",
-  "terraformProviders": [],
+  "terraformProviders": ["aws", "mongodbatlas", "tfe"],
   "terraformModules": [],
   "context": {
     "excludeStackIdFromLogicalIds": "true",

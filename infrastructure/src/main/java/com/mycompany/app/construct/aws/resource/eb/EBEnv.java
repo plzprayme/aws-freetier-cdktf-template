@@ -35,7 +35,6 @@ public class EBEnv implements Provisonable<ElasticBeanstalkEnvironment> {
                 .application(appName)
                 .solutionStackName(SOLUTION_STACK)
                 .setting(settings)
-                
                 .build();
 
         new Output().provision(scope, "EB-ENDPOINT", ebEnv.getEndpointUrl());

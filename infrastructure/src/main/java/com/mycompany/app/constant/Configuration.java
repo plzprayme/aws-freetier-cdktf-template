@@ -17,4 +17,9 @@ public class Configuration {
         public static String WORKSPACE = ENV.get("TF_WORKSPACE");
         public static String TOKEN = ENV.get("TF_TOKEN");
     }
+
+    public static class MongoDB {
+        public static String ACCESS_KEY = ENV.get("MONGO_ACCESS_KEY");
+        public static String SECRET_KEY = ENV.get("MONGO_SECRET_KEY");
+    }
 }
