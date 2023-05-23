@@ -10,8 +10,10 @@
     2. 프로필 클릭 -> User Settings
     3. Tokens
     4. Create an API Token
-2. AWS Credentials
+2. AWS
     1. ACCESS_KEY, SECRET_KEY 발급 [공식문서](https://docs.aws.amazon.com/ko_kr/IAM/latest/UserGuide/id_credentials_access-keys.html) 참고
+    2. EC2 KEY Pair 생성 
+      3. .env 의 EC2_KEYPAIR_NAME에 주입하하게 되며 EC2로 SSH 접근할 때 사용됨.
 
 ## 환경변수
 `.env.tmpl` 설명 참고
@@ -20,7 +22,7 @@
 ```shell
 $ cp .env.tmpl .env
 $ docker build -t aws:v1 .
-$ docker run -d --name awsv1 aws:v1 && docker exec -it --env-file ./infrastructure/.env awsv1 /bin/sh
+$ docker run -d --name awsv1 aws:v1 && docker exec -it --env-file .env awsv1 /bin/sh
 (conatiner shell) $ cdktf deploy  
 (container shell) $ cdktf output
 (container shell) $ exit
@@ -31,7 +33,7 @@ $ docker kill awsv1 | docker container rm awsv1
 ```
 $ cp .env.tmpl .env
 $ docker build -t aws:v1 .
-$ docker run -d --name awsv1 aws:v1 && docker exec -it --env-file ./infrastructure/.env awsv1 /bin/sh
+$ docker run -d --name awsv1 aws:v1 && docker exec -it --env-file .env awsv1 /bin/sh
 (conatiner shell) $ cdktf deploy
 (container shell) $ exit
 $ docker kill awsv1 | docker container rm awsv1

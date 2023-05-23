@@ -244,4 +244,5 @@ cdktf.log
 target/
 infrastructure/.env
 infrastructure/.env-*
-
+.env
+.env-*

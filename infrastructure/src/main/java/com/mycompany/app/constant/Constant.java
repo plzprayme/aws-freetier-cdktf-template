@@ -19,10 +19,6 @@ public class Constant {
             public static String KEY_PAIR_NAME = ENV.get("EC2_KEYPAIR_NAME");
         }
 
-        public static class S3 {
-            public static String SOURCE_BUNDLE_PATH = ENV.get("SOURCE_BUNDLE_PATH");
-        }
-
         public static class RDS {
             public static String DB_NAME = ENV.get("DB_NAME");
             public static String ENGINE = ENV.get("DB_ENGINE");
